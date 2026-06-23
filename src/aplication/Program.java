@@ -25,7 +25,7 @@ public class Program{
             System.out.println("erro, checkin maior que checkout");
         } else{
             Reservation rs = new Reservation(quarto, checkin, checkout);
-            System.out.println("Reservation: " + rs);
+            System.out.println("reserva: " + rs);
 
             System.out.println();
             System.out.println("quarto: ");
@@ -34,17 +34,14 @@ public class Program{
             System.out.println("data checkin (dd/MM/yyyy): ");
             checkin = sdf.parse(sc.next());
 
-            System.out.println("date checkout (dd/MM/yyyy): ");
+            System.out.println("data checkout (dd/MM/yyyy): ");
             checkout = sdf.parse(sc.next());
 
-            Date now = new Date();
-            if (checkin.before(now) || checkout.before(now)){
-                System.out.println("erro na reserva, deve ser datas futuras");
-            } else if(!checkout.after(checkin)) {
-                System.out.println("erro, checkin maior que checkout");
-            } else{
-                rs.updateDate(checkin, checkout);
-                System.out.println("Reservation: " + rs);
+            String error = rs.updateDate(checkin, checkout);
+            if(error != null) {
+                System.out.println("Erro na reserva: " + error);
+            }else {
+            System.out.println("reserva: " + rs);
             }
 
         }
